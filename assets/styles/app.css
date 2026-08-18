@@ -1,0 +1,133 @@
+@import "tailwindcss";
+
+* {
+    font-family: sans-serif;
+    @apply text-gray-300;
+}
+
+body {
+    background-color: rgb(32, 32, 41);
+}
+
+form:not(.table-form){
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    margin: auto;
+    max-width: 400px;
+    justify-content: center;
+    width: 100%;
+    /* height: fit-content; */
+    padding: 10px;
+}
+
+button {
+    cursor: pointer;
+}
+
+.wrapper {
+    margin: auto;
+    width: 100%;
+    max-width: 700px;
+    padding: 10px;
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    /* background-color: white; */
+    outline: none;
+    appearance: none;
+    border-bottom: 2px solid rgb(59, 64, 83);
+    padding: 5px;
+    padding-bottom: 10px;
+    transition-duration: 0.3s;
+    /* @apply ; */
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus {
+    /* background-color: white; */
+    border-bottom: 2px solid rgb(110, 117, 145);
+    /* @apply ; */
+}
+
+.alert {
+
+    @apply p-3 rounded-md bg-green-300/30;
+}
+.alert-danger {
+    background-color: rgb(50, 40, 44);
+    @apply text-red-400
+}
+
+button {
+    background-color: rgb(43, 43, 58);
+    padding: 10px;
+    transition-duration: 0.3s;
+    @apply rounded-md;
+}
+button:hover {
+    background-color: rgb(51, 51, 68);
+}
+
+a {
+    @apply text-gray-400 underline
+}
+
+/* ADMIN */
+
+#toolbar {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+}
+#toolbar button {
+    padding: 5px;
+    font-size: 20px;
+}
+
+.action-button::before {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 125%;
+    left: 50%;
+    transform: translateX(-50%) scale(0.9);
+    white-space: nowrap;
+}
+
+table {
+    background-color: rgb(36, 36, 49);
+    width: 100%;
+    border: collapse;
+    @apply rounded-lg;
+}
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+}
+.table-form {
+    @apply flex flex-col gap-10;
+    display: flex;
+}
+
+tr {
+    cursor: pointer;
+}
+.selected-row {
+    @apply bg-gray-300/10;
+}
+
+th, td {
+    @apply p-3 text-left border-gray-600 border;
+}
+
+thead {
+    /* border-bottom: 2px solid white; */
+    @apply border-b-gray-500 border-b-2;
+}

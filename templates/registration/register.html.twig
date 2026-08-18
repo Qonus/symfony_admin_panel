@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+    {% for flash_error in app.flashes('verify_email_error') %}
+        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+    {% endfor %}
+
+
+
+    {{ form_start(registrationForm) }}
+        {% for message in app.flashes('error') %}
+            <div class="alert alert-danger">{{ message }}</div>
+        {% endfor %}
+
+        {% for message in app.flashes('success') %}
+            <div class="alert !">{{ message }}</div>
+        {% endfor %}
+        <h1 class="text-2xl">Register</h1>
+        {% for flash_error in app.flashes('verify_email_error') %}
+            <div class="alert alert-danger">{{ flash_error }}</div>
+        {% endfor %}
+        
+        {{ form_widget(registrationForm.username, {
+            attr: {placeholder: 'Username', autofocus: true}
+        }) }}
+        {% if not registrationForm.username.vars.valid %}
+            <div class="alert alert-danger">{{ form_errors(registrationForm.username) }}</div>
+        {% endif %}
+        {{ form_widget(registrationForm.email, {
+            attr: {placeholder: 'Email'}
+        }) }}
+        {% if not registrationForm.email.vars.valid %}
+            <div class="alert alert-danger">{{ form_errors(registrationForm.email) }}</div>
+        {% endif %}
+        {{ form_widget(registrationForm.plainPassword, {
+            attr: {placeholder: 'Password'}
+        }) }}
+
+        <a href={{ path("app_login") }} class="">Log into an account?</a>
+        <button type="submit" class="btn">Register</button>
+    {{ form_end(registrationForm) }}
+{% endblock %}

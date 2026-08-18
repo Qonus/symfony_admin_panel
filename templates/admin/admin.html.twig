@@ -1,0 +1,123 @@
+{% extends 'base.html.twig' %}
+
+
+{% block title %} Admin Panel{% endblock %}
+
+{% block body %}
+<h1 class="text-2xl">
+Admin Panel
+</h1>
+Hello {{ app.user.userIdentifier }},
+<a class="inline" href={{ path('app_logout') }}>Log Out?</a>
+
+{% for message in app.flashes('error') %}
+    <div class="alert alert-danger">{{ message }}</div>
+{% endfor %}
+
+{% for message in app.flashes('success') %}
+    <div class="alert !">{{ message }}</div>
+{% endfor %}
+
+<form method="POST" class="table-form">
+    <div id="toolbar">
+        <button type="submit" name="action" value="block" title="Block" formaction={{ path('app_users_batch', {'action': 'block'}) }}>Block</button>
+        <button type="submit" name="action" value="unblock" title="Unblock" formaction={{ path('app_users_batch', {'action': 'unblock'}) }}>
+            <svg class="size-7" viewBox="0 0 24 24" fill="none">
+            <g id="iconCarrier"> <path fill="white" d="M13.5 16.5854C13.5 17.4138 12.8284 18.0854 12 18.0854C11.1716 18.0854 10.5 17.4138 10.5 16.5854C10.5 15.7569 11.1716 15.0854 12 15.0854C12.8284 15.0854 13.5 15.7569 13.5 16.5854Z" fill="#0F0F0F"></path>
+            <path fill-rule="evenodd" fill="white" clip-rule="evenodd" d="M6.33367 10C6.20971 9.64407 6.09518 9.27081 5.99836 8.88671C5.69532 7.68444 5.54485 6.29432 5.89748 4.97439C6.26228 3.60888 7.14664 2.39739 8.74323 1.59523C10.3398 0.793061 11.8397 0.806642 13.153 1.32902C14.4225 1.83396 15.448 2.78443 16.2317 3.7452C16.4302 3.98851 16.6166 4.23669 16.7907 4.48449C17.0806 4.89706 16.9784 5.45918 16.5823 5.7713C16.112 6.14195 15.4266 6.01135 15.0768 5.52533C14.9514 5.35112 14.8197 5.17831 14.6819 5.0094C14.0088 4.18414 13.2423 3.51693 12.4138 3.18741C11.6292 2.87533 10.7252 2.83767 9.64112 3.38234C8.55703 3.92702 8.04765 4.6748 7.82971 5.49059C7.5996 6.35195 7.6774 7.36518 7.93771 8.39788C8.07953 8.96054 8.26936 9.50489 8.47135 10H18C19.6569 10 21 11.3431 21 13V20C21 21.6569 19.6569 23 18 23H6C4.34315 23 3 21.6569 3 20V13C3 11.3431 4.34315 10 6 10H6.33367ZM19 13C19 12.4477 18.5523 12 18 12H6C5.44772 12 5 12.4477 5 13V20C5 20.5523 5.44772 21 6 21H18C18.5523 21 19 20.5523 19 20V13Z" fill="#0F0F0F"></path> </g></svg>
+        </button>
+        <button class="!bg-red-400/20 hover:!bg-red-400/30" type="submit" name="action" value="delete" title="Delete" formaction={{ path('app_users_batch', {'action': 'delete'}) }}>
+            <svg class="size-7" viewBox="13.75 14.75 28.5 28.5" fill="white">
+            <defs><filter id="a" width="200%" height="200%" x="-50%" y="-50%" filterUnits="objectBoundingBox"><feOffset dy="1" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset><feGaussianBlur stdDeviation="10" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur><feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.1 0" in="shadowBlurOuter1" result="shadowMatrixOuter1"></feColorMatrix><feMerge><feMergeNode in="shadowMatrixOuter1"></feMergeNode><feMergeNode in="SourceGraphic"></feMergeNode></feMerge></filter></defs><path fill-rule="evenodd" d="M36 26v10.997c0 1.659-1.337 3.003-3.009 3.003h-9.981c-1.662 0-3.009-1.342-3.009-3.003v-10.997h16zm-2 0v10.998c0 .554-.456 1.002-1.002 1.002h-9.995c-.554 0-1.002-.456-1.002-1.002v-10.998h12zm-9-5c0-.552.451-1 .991-1h4.018c.547 0 .991.444.991 1 0 .552-.451 1-.991 1h-4.018c-.547 0-.991-.444-.991-1zm0 6.997c0-.551.444-.997 1-.997.552 0 1 .453 1 .997v6.006c0 .551-.444.997-1 .997-.552 0-1-.453-1-.997v-6.006zm4 0c0-.551.444-.997 1-.997.552 0 1 .453 1 .997v6.006c0 .551-.444.997-1 .997-.552 0-1-.453-1-.997v-6.006zm-6-5.997h-4.008c-.536 0-.992.448-.992 1 0 .556.444 1 .992 1h18.016c.536 0 .992-.448.992-1 0-.556-.444-1-.992-1h-4.008v-1c0-1.653-1.343-3-3-3h-3.999c-1.652 0-3 1.343-3 3v1z" filter="url(#a)"></path></g></svg>
+        </button>
+        <button class="!bg-red-400/20 hover:!bg-red-400/30" type="submit" name="action" value="clean" title="Delete Unverified" formaction={{ path('app_users_batch', {'action': 'clean'}) }}>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-7"><path d="M11 2v2"/><path d="M12 3h-2"/><path d="M13.5 10.5 22 2"/><path d="M14.734 13.841a2 2 0 00-.314-2.42L12.58 9.58a2 2 0 00-2.421-.314l-7.657 4.461A1 1 0 002.3 15.3l6.403 6.403a1 1 0 001.571-.204z"/><path d="M20 15v4"/><path d="M22 17h-4"/><path d="M4 4v4"/><path d="m5 18 2-2"/><path d="M6 6H2"/><path d="m7.699 10.7 5.602 5.601"/></svg>
+        </button>
+    </div>
+<div class="table-container">
+<table>
+    <thead>
+        <tr>
+            <th>
+                <input type="checkbox" id="select-all">
+            </th>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Status</th>
+            <th>Last Login</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for user in users %}
+            <tr class="">
+                <td>
+                    <input type="checkbox" class="user-checkbox" name="ids[]" value="{{ user.id }}">
+                </td>
+                <td>{{ user.username }}</td>
+                <td>{{ user.email }}</td>
+                <td>
+                    {{ user.isBlocked ? "Blocked" : (user.isVerified ? 'Active' : 'Not Verified') }}
+                </td>
+                <td>
+                    {{ user.lastLogin ? user.lastLogin|date('Y-m-d H:i:s') : 'Never' }}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">No users found.</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</div>
+</form>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const selectAllCheckbox = document.getElementById('select-all');
+        const rowCheckboxes = document.querySelectorAll('.user-checkbox');
+        const rows = document.querySelectorAll('tr');
+
+        rows.forEach(row => {
+            row.addEventListener('click', function (event) {
+                const targetTagName = event.target.tagName.toLowerCase();
+                // If user clicks a link, button, or the checkbox itself, exit early
+                if (targetTagName === 'input' || targetTagName === 'button' || targetTagName === 'a') {
+                    return;
+                }
+
+                const checkbox = this.querySelector('input[type="checkbox"]');
+                
+                checkbox.click()
+            });
+        });
+
+        selectAllCheckbox.addEventListener('change', function () {
+            rowCheckboxes.forEach(checkbox => {
+                checkbox.checked = selectAllCheckbox.checked;
+                updateParentRow(checkbox);
+            });
+        });
+
+        function updateParentRow(checkbox) {
+            const parentRow = checkbox.closest('tr');
+            if (checkbox.checked) {
+                parentRow.classList.add('selected-row');
+                console.log(parentRow);
+            } else {
+                parentRow.classList.remove('selected-row');
+            }
+        }
+
+        rowCheckboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', function () {
+                updateParentRow(checkbox);
+                const totalChecked = document.querySelectorAll('.user-checkbox:checked').length;
+                
+                selectAllCheckbox.checked = (totalChecked === rowCheckboxes.length);
+                selectAllCheckbox.indeterminate = (totalChecked > 0 && totalChecked < rowCheckboxes.length);
+            });
+        });
+    });
+</script>
+{% endblock %}
+

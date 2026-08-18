@@ -1,0 +1,7 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+Home
+<a class="block" href={{ path('app_logout') }}>Log Out</a>
+<a class="block" href={{ path('app_admin') }}>Access Admin Panel</a>
+{% endblock %}

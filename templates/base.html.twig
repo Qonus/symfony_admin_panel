@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{% block title %}Qonys Site{% endblock %}</title>
+        {% block stylesheets %}
+            <link rel="stylesheet" href="{{ asset('styles/app.css') }}">
+        {% endblock %}
+    </head>
+    <body>
+        <header class="p-5 m-5">
+        </header>
+        <div class="wrapper">
+        {% block body %}{% endblock %}
+        </div>
+        <footer class="m-auto text-center !text-gray-600">&copy; {{ 'now'|date('Y') }} Qonys inc</footer>
+    </body>
+</html>
