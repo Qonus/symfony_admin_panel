@@ -39,7 +39,7 @@ class AdminController extends AbstractController {
             'delete'  => 'deleted',
             'clean'  => 'deleted',
         ];
-        $this->addFlash('success', sprintf('%d users %s.', $c, $pastTense[$action]));
+        $this->addFlash('success', sprintf('%d %s.', $c, $pastTense[$action]));
         return $this->redirectToRoute('app_admin');
     }
 }
