@@ -11,6 +11,8 @@ WORKDIR /app
 COPY --from=vendor /app/vendor ./vendor
 COPY . .
 ENV DATABASE_URL="postgresql://null:null@127.0.0.1:5432/null?serverVersion=16"
+RUN php bin/console tailwind:build --minify --env=prod
+RUN php bin/console asset-map:compile --env=prod
 RUN php bin/console cache:warmup --env=prod
 ENV SERVER_NAME=":80"
 EXPOSE 80
