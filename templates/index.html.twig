@@ -2,6 +2,15 @@
 
 {% block body %}
 Home
+
+{% for message in app.flashes('error') %}
+    <div class="alert alert-danger">{{ message }}</div>
+{% endfor %}
+
+{% for message in app.flashes('success') %}
+    <div class="alert">{{ message }}</div>
+{% endfor %}
+
 <a class="block" href={{ path('app_logout') }}>Log Out</a>
 <a class="block" href={{ path('app_admin') }}>Access Admin Panel</a>
 {% endblock %}

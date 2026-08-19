@@ -9,6 +9,7 @@ use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Regex;
@@ -35,6 +36,13 @@ class RegistrationFormType extends AbstractType
             ])
             ->add('email', EmailType::class, [
                 'required' => true,
+                'constraints' => [
+                    new Email(
+                        mode: Email::VALIDATION_MODE_HTML5,
+                        message: 'This email format is not valid.',
+                        normalizer: 'trim'
+                    )
+                ]
             ])
             ->add('plainPassword', PasswordType::class, [
                 'mapped' => false,
