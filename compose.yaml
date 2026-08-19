@@ -38,6 +38,4 @@ services:
       - "0.0.0.0:8081:8080"
 
 # volumes:
-###> doctrine/doctrine-bundle ###
   # database_data:
-###< doctrine/doctrine-bundle ###
