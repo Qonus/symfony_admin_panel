@@ -4,7 +4,7 @@
 ```sh
 git clone https://github.com/Qonus/symfony_admin_panel.git
 ```
-- Set environmental variables in `.env`
+- Set environmental variables in `.env`. look at [`.env.example`](https://github.com/Qonus/symfony_admin_panel/blob/main/.env.example) for reference.
 - Deploy via:
 ```sh
 sh ./deploy.sh
